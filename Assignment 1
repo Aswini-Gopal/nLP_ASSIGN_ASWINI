@@ -1,0 +1,91 @@
+import nltk
+from nltk import ngrams
+from collections import Counter
+nltk.download('punkt')
+text = """I like to learn natural language processing and also to learn machine learning."""
+tokens = nltk.word_tokenize(text)
+trigrams = list(ngrams(tokens, 3))
+trigram_freq = Counter(trigrams)
+for trigram, freq in trigram_freq.items():
+  print(f"{trigram}: {freq}")
+import nltk
+from nltk.util import ngrams
+from collections import defaultdict
+import random
+nltk.download('punkt')
+corpus = [
+"I love to learn natural language processing",
+"and also to learn machine learning"
+]
+
+tokenized_corpus = [nltk.word_tokenize(sentence.lower()) for sentence in corpus]
+n = 2
+n_grams = [ngrams(sentence, n) for sentence in tokenized_corpus]
+
+
+next_word_dict = defaultdict(list)
+for sentence in n_grams:
+   for n_gram in sentence:
+       prefix, next_word = n_gram[0], n_gram[1]
+       next_word_dict[prefix].append(next_word)
+def predict_next_word(prefix):
+       prefix = prefix.lower()
+       if prefix in next_word_dict:
+             return random.choice(next_word_dict[prefix])
+       else:
+            return "No prediction available."
+input_prefix = "I love"
+predicted_word = predict_next_word(input_prefix)
+print(f"Next word prediction for '{input_prefix}': {predicted_word}")
+import nltk
+from nltk import ngrams
+from collections import Counter
+nltk.download('punkt')
+text="""I like to learn natural language processing and also to learn machine learning. """
+tokens = nltk.word_tokenize(text)
+bigrams = list(ngrams(tokens, 2))
+bigram_freq = Counter(bigrams)
+word_freq = Counter(tokens)
+bigram_probabilities = {}
+for (w1, w2), count in bigram_freq.items():
+   prob = count / word_freq[w1]
+   bigram_probabilities[(w1, w2)] = prob
+for bigram, prob in bigram_probabilities.items():
+     print(f"P({bigram[1]} | {bigram[0]}) = {prob:.4f}")
+import nltk
+from collections import Counter
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.util import bigrams
+nltk.download('punkt')
+nltk.download('stopwords')
+text_corpus = """Natural language processing (NLP) is a subfield of␣
+linguistics, computer science, and artificial intelligence"""
+tokens = word_tokenize(text_corpus)
+tokens = [token.lower() for token in tokens]
+stop_words = set(stopwords.words('english'))
+tokens = [token for token in tokens if token.isalpha() and token not in
+stop_words]
+bigrams_list = list(bigrams(tokens))
+bigram_counts = Counter(bigrams_list)
+print(bigram_counts)
+import nltk
+from nltk.tokenize import word_tokenize
+from collections import Counter
+
+# Ensure the required nltk data is downloaded
+nltk.download('punkt')
+
+# Sample text corpus
+text_corpus = """I like to learn natural language processing and also to learn machine learning.
+"""
+
+# Tokenize the text to get unigrams
+tokens = word_tokenize(text_corpus)
+
+# Count the frequency of each unigram
+unigram_counts = Counter(tokens)
+
+# Print the unigrams and their counts
+for unigram, count in unigram_counts.items():
+    print(f"{unigram}: {count}")
